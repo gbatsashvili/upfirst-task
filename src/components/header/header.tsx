@@ -4,7 +4,7 @@ import { HeaderStyled } from "./header.styled";
 const Header = (): JSX.Element => {
   return (
     <HeaderStyled>
-      <Button>Header Button</Button>
+      <Button color="#fff">Header Button</Button>
     </HeaderStyled>
   );
 };

@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-size: 14px;
-    font-family: Open-Sans, Helvetica, Sans-Serif;
+    font-family: "Roboto", sans-serif;
   }
 
 `;
@@ -18,6 +18,7 @@ export const Theme = {
   violetBg: "#969EB9",
   primaryViolet: "#A79CED",
   primaryGreen: "#3BB490",
+  primaryBlue: "#26CBFF",
 };
 
 export default GlobalStyle;
