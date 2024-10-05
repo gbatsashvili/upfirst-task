@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CardBlockItem from "./cardBlockItem";
-import { CardsBlockStyled } from "./cardsBlock.styled";
+import { CardsBlockStyled, RenderDataContainer } from "./cardsBlock.styled";
 import Pagination from "../pagination/pagination";
 
 const CardsBlock = () => {
@@ -55,11 +55,22 @@ const CardsBlock = () => {
     });
   };
 
-  return (
-    <CardsBlockStyled>
-      <div>
-        {data && data.length > 0 ? (
-          data.map((item: any) => {
+  const RenderData = (): JSX.Element => {
+    if (!loading && !error && data.length === 0) {
+      return <div className="errorOrNoData">No Data</div>;
+    }
+    if (loading)
+      return (
+        <div className="lds-ripple loading">
+          <div></div>
+          <div></div>
+        </div>
+      );
+
+    if (!loading && data && !error) {
+      return (
+        <div>
+          {data.map((item: any) => {
             return (
               <CardBlockItem
                 key={item.created_at}
@@ -67,11 +78,22 @@ const CardsBlock = () => {
                 deleteCardHandler={deleteCardHandler}
               />
             );
-          })
-        ) : (
-          <div className="errorOrNoData">No Data</div>
-        )}
-      </div>
+          })}
+        </div>
+      );
+    }
+    if (!loading && error) {
+      return <div className="errorOrNoData">No Data</div>;
+    }
+
+    return <></>;
+  };
+
+  return (
+    <CardsBlockStyled>
+      <RenderDataContainer>
+        <RenderData />
+      </RenderDataContainer>
       <Pagination
         total={pagination.total}
         limit={10}
